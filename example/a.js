@@ -1,2 +1,5 @@
-var b = require("./b");
-console.log("a ", b);
+function greeting() {
+  console.log("a");
+}
+
+module.exports = greeting;

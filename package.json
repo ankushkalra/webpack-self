@@ -5,6 +5,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+		"esprima": "0.9.8",
+		"optimist": "0.2.x",
+		"uglify-js": "1.2.5"
+	},
   "keywords": [],
   "author": "",
   "license": "ISC",
