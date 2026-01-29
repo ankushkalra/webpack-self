@@ -28,7 +28,12 @@ var argv = require("optimist")
 
   .demand(1).argv;
 
-var output = argv._[1];
+var input = argv._[0],
+  output = argv._[1];
+
+if (input && input[0] !== "/" && input[1] !== ":") {
+  input = path.join(process.cwd(), input);
+}
 
 if (output && output[0] !== "/" && output[1] !== ":") {
   output = path.join(process.cwd(), output);
@@ -40,7 +45,7 @@ if (argv.options) {
   options = JSON.parse(fs.readFileSync(argv.options, "utf-8"));
 }
 
-options.entry = argv._[0];
+options.input = input;
 
 if (argv["script-src-prefix"]) {
   options.scriptSrcPrefix = argv["script-src-prefix"];
@@ -67,7 +72,7 @@ if (!options.outputPostfix) options.outputPostfix = "." + path.dirname(output);
 var outExists = fs.existsSync(options.outputDirectory);
 if (!outExists) fs.mkdirSync(options.outputDirectory);
 
-webpack(options, function (err, stats) {
+webpack(input, options, function (err, stats) {
   if (err) {
     console.error(err);
     return;
