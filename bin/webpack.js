@@ -63,19 +63,33 @@ if (argv.filenames) {
   options.includeFilenames = true;
 }
 
-output = output || path.join(process.cwd(), "js", "web.js");
-if (!options.outputDirectory) options.outputDirectory = path.dirname(output);
-var basename = path.basename(output);
-if (!options.output) options.output = basename;
+if (argv.single) {
+  webpack(input, options, function (err, source) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    if (output) {
+      fs.writeFileSync(output, source, "utf-8");
+    } else {
+      process.stdout.write(source);
+    }
+  });
+} else {
+  output = output || path.join(process.cwd(), "js", "web.js");
+  if (!options.outputDirectory) options.outputDirectory = path.dirname(output);
+  if (!options.output) options.output = path.basename(output);
 
-if (!options.outputPostfix) options.outputPostfix = "." + path.dirname(output);
-var outExists = fs.existsSync(options.outputDirectory);
-if (!outExists) fs.mkdirSync(options.outputDirectory);
+  if (!options.outputPostfix)
+    options.outputPostfix = "." + path.dirname(output);
+  var outExists = fs.existsSync(options.outputDirectory);
+  if (!outExists) fs.mkdirSync(options.outputDirectory);
 
-webpack(input, options, function (err, stats) {
-  if (err) {
-    console.error(err);
-    return;
-  }
-  console.log("stats = ", stats);
-});
+  webpack(input, options, function (err, stats) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log("stats = ", stats);
+  });
+}
