@@ -18,7 +18,7 @@ var argv = require("optimist")
   .default("filenames", false)
 
   .string("script-src-prefix")
-  .describe("single", "Path prefix for javascript loading")
+  .describe("script-src-prefix", "Path prefix for javascript loading")
 
   .string("options")
   .describe("options", "Options JSON file")
@@ -62,6 +62,7 @@ if (argv.libary) {
 if (argv.filenames) {
   options.includeFilenames = true;
 }
+console.log("argv = ", argv);
 
 if (argv.single) {
   webpack(input, options, function (err, source) {
@@ -79,17 +80,17 @@ if (argv.single) {
   output = output || path.join(process.cwd(), "js", "web.js");
   if (!options.outputDirectory) options.outputDirectory = path.dirname(output);
   if (!options.output) options.output = path.basename(output);
-
   if (!options.outputPostfix)
-    options.outputPostfix = "." + path.dirname(output);
+    options.outputPostfix = "." + path.basename(output);
   var outExists = fs.existsSync(options.outputDirectory);
   if (!outExists) fs.mkdirSync(options.outputDirectory);
 
+  console.log("webpack called else");
   webpack(input, options, function (err, stats) {
     if (err) {
       console.error(err);
       return;
     }
-    console.log("stats = ", stats);
+    console.log(stats);
   });
 }

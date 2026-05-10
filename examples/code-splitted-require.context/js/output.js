@@ -46,3 +46,21 @@
 /******/ }
 /******/})(document)
 
+/******/({a:'.output.js', b: 'webpackJsonp', c: 'js/',
+/*******/0: function(module, exports, require) {
+
+function getTemplate(templateName, callback) {
+	require.ensure(1, function(require) {
+		callback(require(/* ../require.context/templates */1)("./"+templateName));
+	});
+}
+getTemplate("a", function(a) {
+	console.log(a);
+});
+getTemplate("b", function(b) {
+	console.log(b);
+});
+
+/*******/},
+/*******/
+/*******/})
