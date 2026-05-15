@@ -13,9 +13,28 @@ setTimeout(function() {
 
 window.test(require("./circular") === 1, "circular require should work");
 window.test(require("./singluar.js").value === 1, "sigular module loaded");
-require("./singluar.js").value = 2;
+require("./sing" + "luar.js").value = 2;
 window.test(require("./singluar").value === 2, "exported object is singluar");
 window.test(require("subfilemodule") === "subfilemodule", "Modules as single file should load");
+window.test(require.context("../templates")("./tmpl") === "test template", "Context should work");
+window.test(require . context ( "." + "." + "/" + "templ" + "ates" ) ( "./subdir/tmpl.js" ) === "subdir test template", "Context should work with subdirectories and splitted");
+var template = "tmpl", templateFull = "./tmpl.js";
+window.test(require("../templates/" + template) === "test template", "Automatical context should work");
+window.test(require("../templates/templateLoader")(templateFull) === "test template", "Automatical context without prefix should work");
+window.test(require("../templates/templateLoaderIndirect")(templateFull) === "test template", "Automatical context should work with require identifier");
+window.test(function(require) { return require; }(1234) === 1234, "require overwrite in anonymos function");
+function testFunc(abc, require) {
+	return require;
+}
+window.test(testFunc(333, 678) === 678, "require overwrite in named function");
+
+
+require.ensure([], function(require) {
+	var contextRequire = require.context(".");
+	window.test(contextRequire("./singluar").value === 2, "Context works in chunk");
+	var singl = "singl";
+	window.test(require("." + "/" + singl + "uar").value === 2, "Context works in chunk, when splitted");
+});
 
 require.ensure([], function(require) {
 	require("./acircular");

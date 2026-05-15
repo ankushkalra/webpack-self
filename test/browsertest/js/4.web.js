@@ -1,11 +1,11 @@
-/******/webpackJsonp(4, {
-/******/3: function(module, exports, require) {
+/*******/webpackJsonp(4, {
+/*******/10: function(module, exports, require) {
 
 require.ensure(3, function(require) {
-	require(6)
-	window.test(true, "Circular async loading 1")
+	require(/* ./acircular */7)
+	window.test(true, "Circular async loading 2")
 })
 
-/******/},
-/******/
-/******/})
+/*******/},
+/*******/
+/*******/})
