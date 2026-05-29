@@ -55,8 +55,8 @@ window.test(window.libary2.ok, "libary2 loaded");
 require.ensure(1, function(require) {
 	// Comments work!
 	exports.ok = true;
-	window.test(require(/* subcontent */18) === "replaced", "node_modules should be replaced with web_modules");
-	window.test(require(/* subcontent2/file.js */19) === "orginal", "node_modules should still work when web_modules exists");
+	window.test(require(/* subcontent */22) === "replaced", "node_modules should be replaced with web_modules");
+	window.test(require(/* subcontent2/file.js */23) === "orginal", "node_modules should still work when web_modules exists");
 });
 setTimeout(function() {
 	window.test(exports.ok, "asnyc loaded, exports is still avaible");
@@ -66,7 +66,7 @@ window.test(require(/* ./circular */4) === 1, "circular require should work");
 window.test(require(/* ./singluar.js */1).value === 1, "sigular module loaded");
 require(/* ./singluar.js */1).value = 2;
 window.test(require(/* ./singluar */1).value === 2, "exported object is singluar");
-window.test(require(/* subfilemodule */20) === "subfilemodule", "Modules as single file should load");
+window.test(require(/* subfilemodule */24) === "subfilemodule", "Modules as single file should load");
 window.test(require(/* ../templates */2)("./tmpl") === "test template", "Context should work");
 window.test(require(/* ../templates */2) ( "./subdir/tmpl.js" ) === "subdir test template", "Context should work with subdirectories and splitted");
 var template = "tmpl", templateFull = "./tmpl.js";
@@ -85,31 +85,43 @@ require.ensure(2, function(require) {
 	window.test(contextRequire("./singluar").value === 2, "Context works in chunk");
 	var singl = "singl";
 	window.test(require(/* . */3)("./" + singl + "uar").value === 2, "Context works in chunk, when splitted");
+  require(/* __webpack_console */7).log("module = ", require(/* __webpack_module */8), require(/* __webpack_module */8).id, typeof module.id);
+	window.test(typeof module.id === "string", "module.id should be a string");
+	window.test(require(/* __webpack_process */9).argv && require(/* __webpack_process */9).argv.length > 1, "process.argv should be an array");
+	require(/* __webpack_process */9).nextTick(function() {
+		sum2++;
+	});
+	require(/* __webpack_process */9).on("xyz", function() {
+		sum2++;
+	});
+	require(/* __webpack_process */9).emit("xyz");
 });
 
 require.ensure(7, function(require) {
-	require(/* ./acircular */7);
-	require(/* ./duplicate */9);
-	require(/* ./duplicate2 */8);
+	require(/* ./acircular */11);
+	require(/* ./duplicate */10);
+	require(/* ./duplicate2 */12);
 });
 require.ensure(8, function(require) {
-	require(/* ./acircular2 */10);
-	require(/* ./duplicate */9);
-	require(/* ./duplicate2 */8);
+	require(/* ./acircular2 */13);
+	require(/* ./duplicate */10);
+	require(/* ./duplicate2 */12);
 });
 var sum = 0;
 require.ensure(9, function(require) {
-	require(/* ./duplicate */9);
-	require(/* ./duplicate2 */8);
+	require(/* ./duplicate */10);
+	require(/* ./duplicate2 */12);
 	sum++;
 });
 require.ensure(10, function(require) {
-	require(/* ./duplicate */9);
-	require(/* ./duplicate2 */8);
+	require(/* ./duplicate */10);
+	require(/* ./duplicate2 */12);
 	sum++;
 });
+var sum2 = 0;
 setTimeout(function() {
 	window.test(sum === 2, "Multiple callbacks on code load finish");
+	window.test(sum2 === 2, "process.nextTick and process.emit/on should be polyfilled");
 }, 3000);
 
 
@@ -124,7 +136,7 @@ module.exports.value = 1;
 /*******/2: function(module, exports, require) {
 
 /***/module.exports = function(name) {
-/***/	var map = {"./templateLoader.js":5,"./templateLoaderIndirect.js":6,"./tmpl.js":12,"./subdir/tmpl.js":17};
+/***/	var map = {"./templateLoader.js":5,"./templateLoaderIndirect.js":6,"./tmpl.js":15,"./subdir/tmpl.js":20};
 /***/ console.log('name = ', name);/***/	var value = require(map[name]|| map[name + ".web.js"]|| map[name + ".js"]);
 /***/ console.log('value = ', value);/***/	return value;/***/};
 
@@ -161,19 +173,19 @@ function load(requireFunction, name) {
 
 /*******/},
 /*******/
-/*******/12: function(module, exports, require) {
+/*******/15: function(module, exports, require) {
 
 module.exports = "test template";
 
 /*******/},
 /*******/
-/*******/17: function(module, exports, require) {
+/*******/20: function(module, exports, require) {
 
 module.exports = "subdir test template";
 
 /*******/},
 /*******/
-/*******/20: function(module, exports, require) {
+/*******/24: function(module, exports, require) {
 
 module.exports = "subfilemodule";
 

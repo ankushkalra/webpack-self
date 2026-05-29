@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+Base64@~0.2.0:
+  version "0.2.1"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/Base64/-/Base64-0.2.1.tgz"
+  integrity sha512-reGEWshDmTDQDsCec/HduOO9Wyj6yMOupMfhIf3ugN1TDlK2NQW4DDJSqNNtp380SNcvRfXtO8HSCQot0d0SMw==
+
 esprima@0.9.8:
   version "0.9.8"
   resolved "https://unpm.uberinternal.com/artifactory/api/npm/npmjs-virtual/esprima/-/esprima-0.9.8.tgz"
@@ -12,6 +17,19 @@ eyes@>=0.1.6:
   resolved "https://registry.npmjs.org/eyes/-/eyes-0.1.8.tgz"
   integrity sha512-GipyPsXO1anza0AOZdy69Im7hGFCNB7Y/NGjDlZGJ3GJJLtwNSb2vrzYrTYJRrRloVx7pl+bhUaTB8yiccPvFQ==
 
+http-browserify@*:
+  version "1.7.0"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/http-browserify/-/http-browserify-1.7.0.tgz"
+  integrity sha512-Irf/LJXmE3cBzU1eaR4+NEX6bmVLqt1wkmDiA7kBwH7zmb0D8kBAXsDmQ88hhj/qv9iEZKlyGx/hrMcFi8sOHw==
+  dependencies:
+    Base64 "~0.2.0"
+    inherits "~2.0.1"
+
+inherits@~2.0.1:
+  version "2.0.4"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/inherits/-/inherits-2.0.4.tgz"
+  integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
+
 optimist@0.2.x:
   version "0.2.8"
   resolved "https://unpm.uberinternal.com/artifactory/api/npm/npmjs-virtual/optimist/-/optimist-0.2.8.tgz"
@@ -19,10 +37,20 @@ optimist@0.2.x:
   dependencies:
     wordwrap ">=0.0.1 <0.1.0"
 
+sprintf@0.1.x:
+  version "0.1.5"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/sprintf/-/sprintf-0.1.5.tgz"
+  integrity sha512-4X5KsuXFQ7f+d7Y+bi4qSb6eI+YoifDTGr0MQJXRoYO7BO7evfRCjds6kk3z7l5CiJYxgDN1x5Er4WiyCt+zTQ==
+
 uglify-js@1.2.5:
   version "1.2.5"
   resolved "https://unpm.uberinternal.com/artifactory/api/npm/npmjs-virtual/uglify-js/-/uglify-js-1.2.5.tgz"
   integrity sha512-Ps1oQryKOcRDYuAN1tGpPWd/DIRMcdLz4p7JMxLjJiFvp+aaG01IEu0ZSoVvYUSxIkvW7k2X50BCW2InguEGlg==
+
+vm-browserify@*:
+  version "1.1.2"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/vm-browserify/-/vm-browserify-1.1.2.tgz"
+  integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
 
 vows@0.6.2:
   version "0.6.2"

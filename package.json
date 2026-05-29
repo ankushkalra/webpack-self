@@ -8,8 +8,13 @@
   "dependencies": {
 		"esprima": "0.9.8",
 		"optimist": "0.2.x",
-		"uglify-js": "1.2.5"
+		"uglify-js": "1.2.5",
+    "sprintf": "0.1.x"
 	},
+  "optionalDependencies": {
+    "http-browserify": "*",
+    "vm-browserify": "*"
+  },
   "devDependencies": {
 		"vows": "0.6.2"
 	},

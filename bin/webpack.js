@@ -26,6 +26,18 @@ var argv = require("optimist")
   .string("libary")
   .describe("libary", "Stores the exports in this variable")
 
+  .boolean("colors")
+  .describe("colors", "Output Stats with colors")
+  .default("colors", false)
+
+  .boolean("json")
+  .describe("json", "Output Stats as JSON")
+  .default("json", false)
+
+  .string("alias")
+  .describe("alias", "Set a alias name for a module. ex. http=http-browserify")
+
+
   .demand(1).argv;
 
 var input = argv._[0],
@@ -55,17 +67,30 @@ if (argv.min) {
   options.minimize = true;
 }
 
+if (argv.filenames) {
+  options.includeFilenames = true;
+}
+
 if (argv.libary) {
   options.libary = argv.libary;
 }
 
-if (argv.filenames) {
-  options.includeFilenames = true;
+if (argv.alias) {
+  if (typeof argv.alias === "string")
+    argv.alias = [argv.alias];
+  options.resolve = options.resolve || {};
+  options.resolve.alias = options.resolve.alias || {};
+  var aliasObj = options.resolve.alias;
+  argv.alias.forEach(function(alias) {
+    alias = alias.split("=");
+    aliasObj[alias[0]] = alias[1];
+  });
 }
-console.log("argv = ", argv);
+
+// console.log("argv = ", argv);
 
 if (argv.single) {
-  webpack(input, options, function (err, source) {
+  webpack(input, options, function(err, source) {
     if (err) {
       console.error(err);
       return;
@@ -86,7 +111,7 @@ if (argv.single) {
   if (!outExists) fs.mkdirSync(options.outputDirectory);
 
   console.log("webpack called else");
-  webpack(input, options, function (err, stats) {
+  webpack(input, options, function(err, stats) {
     if (err) {
       console.error(err);
       return;

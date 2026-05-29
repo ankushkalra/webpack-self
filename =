@@ -8,7 +8,6 @@ module.exports = function(module) {
   function genReplaceRequire(requireItem) {
     if (requireItem.expressionRange && requireItem.id !== undefined) {
       var prefix = "";
-      // console.log("requireItem.name = ", requireItem);
       if (requireItem.name) {
         prefix += "/* " + requireItem.name + " */";
       }
@@ -24,7 +23,6 @@ module.exports = function(module) {
     // console.log("contextItem = ", contextItem);
     var postfix = "";
     var prefix = "";
-    // console.log("contextItem.name = ", contextItem.name);
     if (contextItem.name) {
       prefix += "/* " + contextItem.name + " */";
     }
