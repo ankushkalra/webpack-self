@@ -2,7 +2,7 @@
 /*******/3: function(module, exports, require) {
 
 /***/module.exports = function(name) {
-/***/	var map = {"./acircular.js":11,"./acircular2.js":13,"./circular.js":4,"./duplicate.js":10,"./duplicate2.js":12,"./index.web.js":0,"./singluar.js":1,"./a.js":16,"./index.js":19,"./b.js":17,"./circular2.js":18};
+/***/	var map = {"./acircular.js":9,"./acircular2.js":13,"./circular.js":4,"./duplicate.js":11,"./duplicate2.js":12,"./index.web.js":0,"./singluar.js":1,"./a.js":16,"./index.js":19,"./b.js":17,"./circular2.js":18};
 /***/ console.log('name = ', name);/***/	var value = require(map[name]|| map[name + ".web.js"]|| map[name + ".js"]);
 /***/ console.log('value = ', value);/***/	return value;/***/};
 
@@ -38,6 +38,15 @@ exports.id = "webpack";
 /*******/
 /*******/9: function(module, exports, require) {
 
+require.ensure(3, function(require) {
+	require(/* ./acircular2 */13)
+	window.test(true, "Circular async loading 1")
+})
+
+/*******/},
+/*******/
+/*******/10: function(module, exports, require) {
+
 exports = module.exports = new (require(/* events */21).EventEmitter);
 if(Object.prototype.__defineGetter__) {
 	exports.__defineGetter__("title", function() { return window.title; });
@@ -62,19 +71,10 @@ exports.features = {};
 
 /*******/},
 /*******/
-/*******/10: function(module, exports, require) {
+/*******/11: function(module, exports, require) {
 
 require.ensure(5, function(require) {
 	window.test(require(/* ./a */16) === "a", "Duplicate module should work")
-})
-
-/*******/},
-/*******/
-/*******/11: function(module, exports, require) {
-
-require.ensure(3, function(require) {
-	require(/* ./acircular2 */13)
-	window.test(true, "Circular async loading 1")
 })
 
 /*******/},
@@ -90,7 +90,7 @@ require.ensure(6, function(require) {
 /*******/13: function(module, exports, require) {
 
 require.ensure(4, function(require) {
-	require(/* ./acircular */11)
+	require(/* ./acircular */9)
 	window.test(true, "Circular async loading 2")
 })
 

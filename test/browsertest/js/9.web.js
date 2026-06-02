@@ -1,5 +1,5 @@
 /*******/webpackJsonp(9, {
-/*******/10: function(module, exports, require) {
+/*******/11: function(module, exports, require) {
 
 require.ensure(5, function(require) {
 	window.test(require(/* ./a */16) === "a", "Duplicate module should work")

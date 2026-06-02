@@ -87,34 +87,34 @@ require.ensure(2, function(require) {
 	window.test(require(/* . */3)("./" + singl + "uar").value === 2, "Context works in chunk, when splitted");
   require(/* __webpack_console */7).log("module = ", require(/* __webpack_module */8), require(/* __webpack_module */8).id, typeof module.id);
 	window.test(typeof module.id === "string", "module.id should be a string");
-	window.test(require(/* __webpack_process */9).argv && require(/* __webpack_process */9).argv.length > 1, "process.argv should be an array");
-	require(/* __webpack_process */9).nextTick(function() {
+	window.test(require(/* __webpack_process */10).argv && require(/* __webpack_process */10).argv.length > 1, "process.argv should be an array");
+	require(/* __webpack_process */10).nextTick(function() {
 		sum2++;
 	});
-	require(/* __webpack_process */9).on("xyz", function() {
+	require(/* __webpack_process */10).on("xyz", function() {
 		sum2++;
 	});
-	require(/* __webpack_process */9).emit("xyz");
+	require(/* __webpack_process */10).emit("xyz");
 });
 
 require.ensure(7, function(require) {
-	require(/* ./acircular */11);
-	require(/* ./duplicate */10);
+	require(/* ./acircular */9);
+	require(/* ./duplicate */11);
 	require(/* ./duplicate2 */12);
 });
 require.ensure(8, function(require) {
 	require(/* ./acircular2 */13);
-	require(/* ./duplicate */10);
+	require(/* ./duplicate */11);
 	require(/* ./duplicate2 */12);
 });
 var sum = 0;
 require.ensure(9, function(require) {
-	require(/* ./duplicate */10);
+	require(/* ./duplicate */11);
 	require(/* ./duplicate2 */12);
 	sum++;
 });
 require.ensure(10, function(require) {
-	require(/* ./duplicate */10);
+	require(/* ./duplicate */11);
 	require(/* ./duplicate2 */12);
 	sum++;
 });

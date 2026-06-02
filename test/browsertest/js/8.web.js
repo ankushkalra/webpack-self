@@ -1,5 +1,5 @@
 /*******/webpackJsonp(8, {
-/*******/10: function(module, exports, require) {
+/*******/11: function(module, exports, require) {
 
 require.ensure(5, function(require) {
 	window.test(require(/* ./a */16) === "a", "Duplicate module should work")
@@ -18,7 +18,7 @@ require.ensure(6, function(require) {
 /*******/13: function(module, exports, require) {
 
 require.ensure(4, function(require) {
-	require(/* ./acircular */11)
+	require(/* ./acircular */9)
 	window.test(true, "Circular async loading 2")
 })
 

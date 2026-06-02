@@ -1,17 +1,17 @@
 /*******/webpackJsonp(7, {
-/*******/10: function(module, exports, require) {
+/*******/9: function(module, exports, require) {
 
-require.ensure(5, function(require) {
-	window.test(require(/* ./a */16) === "a", "Duplicate module should work")
+require.ensure(3, function(require) {
+	require(/* ./acircular2 */13)
+	window.test(true, "Circular async loading 1")
 })
 
 /*******/},
 /*******/
 /*******/11: function(module, exports, require) {
 
-require.ensure(3, function(require) {
-	require(/* ./acircular2 */13)
-	window.test(true, "Circular async loading 1")
+require.ensure(5, function(require) {
+	window.test(require(/* ./a */16) === "a", "Duplicate module should work")
 })
 
 /*******/},

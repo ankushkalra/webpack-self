@@ -2,7 +2,7 @@
 /*******/13: function(module, exports, require) {
 
 require.ensure(4, function(require) {
-	require(/* ./acircular */11)
+	require(/* ./acircular */9)
 	window.test(true, "Circular async loading 2")
 })
 
