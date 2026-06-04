@@ -1,14 +1,14 @@
 /*******/webpackJsonp(1, {
-/*******/22: function(module, exports, require) {
+/*******/24: function(module, exports, require) {
 
-window.test(true, "This file should be loaded, because it is the replacement");
-module.exports = "replaced";
+module.exports = "orginal";
 
 /*******/},
 /*******/
-/*******/23: function(module, exports, require) {
+/*******/25: function(module, exports, require) {
 
-module.exports = "orginal";
+window.test(true, "This file should be loaded, because it is the replacement");
+module.exports = "replaced";
 
 /*******/},
 /*******/

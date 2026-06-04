@@ -1,1 +1,2 @@
 window.test(false, "index.js should be replaced with index.web.js");
+sdfasdfasd

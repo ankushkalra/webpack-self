@@ -4,6 +4,7 @@
 /******/  var installedModules = {}, installedChunks = {0:1};
 /******/
 /******/  function require(moduleId) {
+/******/    if (typeof moduleId !== "number") throw new Error("Cannot find module '"+moduleId+"'"); 
 /******/    if (installedModules[moduleId]) {
 /******/      return installedModules[moduleId].exports;
 /******/    }

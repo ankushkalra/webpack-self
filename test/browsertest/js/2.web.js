@@ -2,52 +2,15 @@
 /*******/3: function(module, exports, require) {
 
 /***/module.exports = function(name) {
-/***/	var map = {"./acircular.js":9,"./acircular2.js":13,"./circular.js":4,"./duplicate.js":11,"./duplicate2.js":12,"./index.web.js":0,"./singluar.js":1,"./a.js":16,"./index.js":19,"./b.js":17,"./circular2.js":18};
+/***/	var map = {"./acircular.js":12,"./acircular2.js":15,"./circular.js":4,"./duplicate.js":13,"./duplicate2.js":14,"./index.web.js":0,"./singluar.js":1,"./a.js":18,"./index.js":21,"./b.js":19,"./circular2.js":20};
 /***/ console.log('name = ', name);/***/	var value = require(map[name]|| map[name + ".web.js"]|| map[name + ".js"]);
 /***/ console.log('value = ', value);/***/	return value;/***/};
 
 /*******/},
 /*******/
-/*******/7: function(module, exports, require) {
-
-var console = window.console;
-exports.log = (require(/* __webpack_console */7) && require(/* __webpack_console */7).log) || function() { };
-exports.info = (require(/* __webpack_console */7) && require(/* __webpack_console */7).info) || function() { };
-exports.error = (require(/* __webpack_console */7) && require(/* __webpack_console */7).error) || function() { };
-exports.warn = (require(/* __webpack_console */7) && require(/* __webpack_console */7).warn) || function() { };
-exports.dir = (require(/* __webpack_console */7) && require(/* __webpack_console */7).dir) || function() { };
-exports.time = (require(/* __webpack_console */7) && require(/* __webpack_console */7).time) || function(label) {
-  times[label] = Date.now();
-};
-exports.timeEnd = (require(/* __webpack_console */7) && require(/* __webpack_console */7).timeEnd) || function() {
-  var duration = Date.now() - times[label];
-  exports.log('%s: %dms', label, duration);
-};
-exports.trace = (require(/* __webpack_console */7) && require(/* __webpack_console */7).trace) || function() { };
-exports.assert = (require(/* __webpack_console */7) && require(/* __webpack_console */7).assert) || function() { };
-
-
-/*******/},
-/*******/
-/*******/8: function(module, exports, require) {
-
-exports.deprecate = function() {};
-exports.id = "webpack";
-
-/*******/},
-/*******/
-/*******/9: function(module, exports, require) {
-
-require.ensure(3, function(require) {
-	require(/* ./acircular2 */13)
-	window.test(true, "Circular async loading 1")
-})
-
-/*******/},
-/*******/
 /*******/10: function(module, exports, require) {
 
-exports = module.exports = new (require(/* events */21).EventEmitter);
+exports = module.exports = new (require(/* events */23).EventEmitter);
 if(Object.prototype.__defineGetter__) {
 	exports.__defineGetter__("title", function() { return window.title; });
 	exports.__defineSetter__("title", function(t) { window.title = t; });
@@ -73,55 +36,73 @@ exports.features = {};
 /*******/
 /*******/11: function(module, exports, require) {
 
-require.ensure(5, function(require) {
-	window.test(require(/* ./a */16) === "a", "Duplicate module should work")
-})
+module.exports = window;
+
 
 /*******/},
 /*******/
 /*******/12: function(module, exports, require) {
 
-require.ensure(6, function(require) {
-	window.test(require(/* ./b */17) === "a", "Duplicate indirect module should work")
+require.ensure(3, function(require) {
+	require(/* ./acircular2 */15)
+	window.test(true, "Circular async loading 1")
 })
 
 /*******/},
 /*******/
 /*******/13: function(module, exports, require) {
 
+require.ensure(5, function(require) {
+	window.test(require(/* ./a */18) === "a", "Duplicate module should work")
+})
+
+/*******/},
+/*******/
+/*******/14: function(module, exports, require) {
+
+require.ensure(6, function(require) {
+	window.test(require(/* ./b */19) === "a", "Duplicate indirect module should work")
+})
+
+/*******/},
+/*******/
+/*******/15: function(module, exports, require) {
+
 require.ensure(4, function(require) {
-	require(/* ./acircular */9)
+	require(/* ./acircular */12)
 	window.test(true, "Circular async loading 2")
 })
 
 /*******/},
 /*******/
-/*******/16: function(module, exports, require) {
+/*******/18: function(module, exports, require) {
 
 module.exports = "a";
 
 /*******/},
 /*******/
-/*******/17: function(module, exports, require) {
-
-module.exports = require(/* ./a */16);
-
-/*******/},
-/*******/
-/*******/18: function(module, exports, require) {
-
-module.exports = 2;
-module.exports = require(/* ./circular2 */18);
-
-/*******/},
-/*******/
 /*******/19: function(module, exports, require) {
 
-window.test(false, "index.js should be replaced with index.web.js");
+module.exports = require(/* ./a */18);
+
+/*******/},
+/*******/
+/*******/20: function(module, exports, require) {
+
+module.exports = 2;
+module.exports = require(/* ./circular2 */20);
 
 /*******/},
 /*******/
 /*******/21: function(module, exports, require) {
+
+window.test(false, "index.js should be replaced with index.web.js");
+sdfasdfasd
+
+
+/*******/},
+/*******/
+/*******/23: function(module, exports, require) {
 
 // Copyright Joyent, Inc. and other Node contributors.
 //

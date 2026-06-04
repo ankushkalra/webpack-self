@@ -3,6 +3,7 @@
 /******/  var installedModules = {}, installedChunks = {0:1};
 /******/
 /******/  function require(moduleId) {
+/******/    if (typeof moduleId !== "number") throw new Error("Cannot find module '"+moduleId+"'"); 
 /******/    if (installedModules[moduleId]) {
 /******/      return installedModules[moduleId].exports;
 /******/    }
@@ -55,8 +56,8 @@ window.test(window.libary2.ok, "libary2 loaded");
 require.ensure(1, function(require) {
 	// Comments work!
 	exports.ok = true;
-	window.test(require(/* subcontent */22) === "replaced", "node_modules should be replaced with web_modules");
-	window.test(require(/* subcontent2/file.js */23) === "orginal", "node_modules should still work when web_modules exists");
+	window.test(require(/* subcontent */25) === "replaced", "node_modules should be replaced with web_modules");
+	window.test(require(/* subcontent2/file.js */24) === "orginal", "node_modules should still work when web_modules exists");
 });
 setTimeout(function() {
 	window.test(exports.ok, "asnyc loaded, exports is still avaible");
@@ -66,7 +67,7 @@ window.test(require(/* ./circular */4) === 1, "circular require should work");
 window.test(require(/* ./singluar.js */1).value === 1, "sigular module loaded");
 require(/* ./singluar.js */1).value = 2;
 window.test(require(/* ./singluar */1).value === 2, "exported object is singluar");
-window.test(require(/* subfilemodule */24) === "subfilemodule", "Modules as single file should load");
+window.test(require(/* subfilemodule */26) === "subfilemodule", "Modules as single file should load");
 window.test(require(/* ../templates */2)("./tmpl") === "test template", "Context should work");
 window.test(require(/* ../templates */2) ( "./subdir/tmpl.js" ) === "subdir test template", "Context should work with subdirectories and splitted");
 var template = "tmpl", templateFull = "./tmpl.js";
@@ -78,14 +79,34 @@ function testFunc(abc, require) {
 	return require;
 }
 window.test(testFunc(333, 678) === 678, "require overwrite in named function");
+function testCase(number) {
+	//window.test(require("./folder/file" + (number === 1 ? 1 : "2")) === "file" + number);
+	window.test(require(number === 1 ? /* ../folder/file1 */7 : number === 2 ? /* ../folder/file2 */8 : number === 3 ? /* ../folder/file3 */9 : "./missingModule") === "file" + number, "?: operator in require do not create context, test "+number);
+}
+testCase(1);
+testCase(2);
+testCase(3);
 
+var error = null;
+try {
+	testCase(4);
+} catch(e) {
+	error = e;
+}
+window.test(error instanceof Error, "Missing module should throw Error, indirect");
+error = null;
+try {
+	require("./missingModule2");
+} catch(e) {
+	error = e;
+}
+window.test(error instanceof Error, "Missing module should throw Error, direct");
 
 require.ensure(2, function(require) {
 	var contextRequire = require(/* . */3);
 	window.test(contextRequire("./singluar").value === 2, "Context works in chunk");
 	var singl = "singl";
 	window.test(require(/* . */3)("./" + singl + "uar").value === 2, "Context works in chunk, when splitted");
-  require(/* __webpack_console */7).log("module = ", require(/* __webpack_module */8), require(/* __webpack_module */8).id, typeof module.id);
 	window.test(typeof module.id === "string", "module.id should be a string");
 	window.test(require(/* __webpack_process */10).argv && require(/* __webpack_process */10).argv.length > 1, "process.argv should be an array");
 	require(/* __webpack_process */10).nextTick(function() {
@@ -95,27 +116,36 @@ require.ensure(2, function(require) {
 		sum2++;
 	});
 	require(/* __webpack_process */10).emit("xyz");
+	window.test(window === require(/* __webpack_global */11), "window === global");
+	(function() {
+		var require = 123;
+		window.test(require === 123, "overwrite require via variable should be ok");
+	}());
+	(function() {
+		var module = 1233;
+		window.test(module === 1233, "overwrite module via variable should be ok");
+	}());
 });
 
 require.ensure(7, function(require) {
-	require(/* ./acircular */9);
-	require(/* ./duplicate */11);
-	require(/* ./duplicate2 */12);
+	require(/* ./acircular */12);
+	require(/* ./duplicate */13);
+	require(/* ./duplicate2 */14);
 });
 require.ensure(8, function(require) {
-	require(/* ./acircular2 */13);
-	require(/* ./duplicate */11);
-	require(/* ./duplicate2 */12);
+	require(/* ./acircular2 */15);
+	require(/* ./duplicate */13);
+	require(/* ./duplicate2 */14);
 });
 var sum = 0;
 require.ensure(9, function(require) {
-	require(/* ./duplicate */11);
-	require(/* ./duplicate2 */12);
+	require(/* ./duplicate */13);
+	require(/* ./duplicate2 */14);
 	sum++;
 });
 require.ensure(10, function(require) {
-	require(/* ./duplicate */11);
-	require(/* ./duplicate2 */12);
+	require(/* ./duplicate */13);
+	require(/* ./duplicate2 */14);
 	sum++;
 });
 var sum2 = 0;
@@ -136,7 +166,7 @@ module.exports.value = 1;
 /*******/2: function(module, exports, require) {
 
 /***/module.exports = function(name) {
-/***/	var map = {"./templateLoader.js":5,"./templateLoaderIndirect.js":6,"./tmpl.js":15,"./subdir/tmpl.js":20};
+/***/	var map = {"./templateLoader.js":5,"./templateLoaderIndirect.js":6,"./tmpl.js":17,"./subdir/tmpl.js":22};
 /***/ console.log('name = ', name);/***/	var value = require(map[name]|| map[name + ".web.js"]|| map[name + ".js"]);
 /***/ console.log('value = ', value);/***/	return value;/***/};
 
@@ -173,19 +203,37 @@ function load(requireFunction, name) {
 
 /*******/},
 /*******/
-/*******/15: function(module, exports, require) {
+/*******/7: function(module, exports, require) {
+
+module.exports = "file1";
+
+/*******/},
+/*******/
+/*******/8: function(module, exports, require) {
+
+module.exports = "file2";
+
+/*******/},
+/*******/
+/*******/9: function(module, exports, require) {
+
+module.exports = "file3";
+
+/*******/},
+/*******/
+/*******/17: function(module, exports, require) {
 
 module.exports = "test template";
 
 /*******/},
 /*******/
-/*******/20: function(module, exports, require) {
+/*******/22: function(module, exports, require) {
 
 module.exports = "subdir test template";
 
 /*******/},
 /*******/
-/*******/24: function(module, exports, require) {
+/*******/26: function(module, exports, require) {
 
 module.exports = "subfilemodule";
 
