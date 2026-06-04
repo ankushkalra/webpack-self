@@ -34,8 +34,8 @@ window.test(window.writing, "Lib1 Should be in first tick");
 window.test(require(/* ./lib/component */1) === "lib1 component", "Lib1 component loaded");
 require.ensure(1, function(require) {
 	window.test(window.writing, "Lib1 Should be in first tick too");
-	window.test(require(/* submodule1 */4) === "submodule1", "Lib1 submodule1 loaded");
-	window.test(require(/* submodule2 */3) === "submodule2", "Lib1 submodule2 loaded");
+	window.test(require(/* submodule1 */3) === "submodule1", "Lib1 submodule1 loaded");
+	window.test(require(/* submodule2 */4) === "submodule2", "Lib1 submodule2 loaded");
 	window.test(require(/* submodule3 */5)() === "submodule3", "Lib1 submodule3 loaded");
 	require.ensure(0, function(require) {
 		window.test(window.writing, "Lib1 Should be still in first tick");
@@ -59,15 +59,15 @@ module.exports = "lib1 component";
 /*******/
 /*******/3: function(module, exports, require) {
 
-module.exports = (function() {
-	return "submodule2";
-}());
+module.exports = "submodule1";
 
 /*******/},
 /*******/
 /*******/4: function(module, exports, require) {
 
-module.exports = "submodule1";
+module.exports = (function() {
+	return "submodule2";
+}());
 
 /*******/},
 /*******/

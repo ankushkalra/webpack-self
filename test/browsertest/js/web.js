@@ -56,8 +56,8 @@ window.test(window.libary2.ok, "libary2 loaded");
 require.ensure(1, function(require) {
 	// Comments work!
 	exports.ok = true;
-	window.test(require(/* subcontent */25) === "replaced", "node_modules should be replaced with web_modules");
-	window.test(require(/* subcontent2/file.js */24) === "orginal", "node_modules should still work when web_modules exists");
+	window.test(require(/* subcontent */24) === "replaced", "node_modules should be replaced with web_modules");
+	window.test(require(/* subcontent2/file.js */25) === "orginal", "node_modules should still work when web_modules exists");
 });
 setTimeout(function() {
 	window.test(exports.ok, "asnyc loaded, exports is still avaible");
@@ -81,7 +81,7 @@ function testFunc(abc, require) {
 window.test(testFunc(333, 678) === 678, "require overwrite in named function");
 function testCase(number) {
 	//window.test(require("./folder/file" + (number === 1 ? 1 : "2")) === "file" + number);
-	window.test(require(number === 1 ? /* ../folder/file1 */7 : number === 2 ? /* ../folder/file2 */8 : number === 3 ? /* ../folder/file3 */9 : "./missingModule") === "file" + number, "?: operator in require do not create context, test "+number);
+	window.test(require(number === 1 ? /* ../folder/file1 */8 : number === 2 ? /* ../folder/file2 */7 : number === 3 ? /* ../folder/file3 */9 : "./missingModule") === "file" + number, "?: operator in require do not create context, test "+number);
 }
 testCase(1);
 testCase(2);
@@ -205,13 +205,13 @@ function load(requireFunction, name) {
 /*******/
 /*******/7: function(module, exports, require) {
 
-module.exports = "file1";
+module.exports = "file2";
 
 /*******/},
 /*******/
 /*******/8: function(module, exports, require) {
 
-module.exports = "file2";
+module.exports = "file1";
 
 /*******/},
 /*******/
