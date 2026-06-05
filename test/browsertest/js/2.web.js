@@ -2,15 +2,22 @@
 /*******/3: function(module, exports, require) {
 
 /***/module.exports = function(name) {
-/***/	var map = {"./acircular.js":12,"./acircular2.js":15,"./circular.js":4,"./duplicate.js":13,"./duplicate2.js":14,"./index.web.js":0,"./singluar.js":1,"./a.js":18,"./index.js":21,"./b.js":19,"./circular2.js":20};
+/***/	var map = {"./acircular.js":15,"./acircular2.js":18,"./circular.js":5,"./duplicate.js":16,"./duplicate2.js":17,"./index.web.js":0,"./singluar.js":1,"./a.js":21,"./index.js":24,"./b.js":22,"./circular2.js":23};
 /***/ console.log('name = ', name);/***/	var value = require(map[name]|| map[name + ".web.js"]|| map[name + ".js"]);
 /***/ console.log('value = ', value);/***/	return value;/***/};
 
 /*******/},
 /*******/
-/*******/10: function(module, exports, require) {
+/*******/12: function(module, exports, require) {
 
-exports = module.exports = new (require(/* events */23).EventEmitter);
+exports.deprecate = function() {};
+exports.id = "webpack";
+
+/*******/},
+/*******/
+/*******/13: function(module, exports, require) {
+
+exports = module.exports = new (require(/* events */26).EventEmitter);
 if(Object.prototype.__defineGetter__) {
 	exports.__defineGetter__("title", function() { return window.title; });
 	exports.__defineSetter__("title", function(t) { window.title = t; });
@@ -34,67 +41,67 @@ exports.features = {};
 
 /*******/},
 /*******/
-/*******/11: function(module, exports, require) {
+/*******/14: function(module, exports, require) {
 
 module.exports = window;
 
 
 /*******/},
 /*******/
-/*******/12: function(module, exports, require) {
+/*******/15: function(module, exports, require) {
 
 require.ensure(3, function(require) {
-	require(/* ./acircular2 */15)
+	require(/* ./acircular2 */18)
 	window.test(true, "Circular async loading 1")
 })
 
 /*******/},
 /*******/
-/*******/13: function(module, exports, require) {
+/*******/16: function(module, exports, require) {
 
 require.ensure(5, function(require) {
-	window.test(require(/* ./a */18) === "a", "Duplicate module should work")
+	window.test(require(/* ./a */21) === "a", "Duplicate module should work")
 })
 
 /*******/},
 /*******/
-/*******/14: function(module, exports, require) {
+/*******/17: function(module, exports, require) {
 
 require.ensure(6, function(require) {
-	window.test(require(/* ./b */19) === "a", "Duplicate indirect module should work")
-})
-
-/*******/},
-/*******/
-/*******/15: function(module, exports, require) {
-
-require.ensure(4, function(require) {
-	require(/* ./acircular */12)
-	window.test(true, "Circular async loading 2")
+	window.test(require(/* ./b */22) === "a", "Duplicate indirect module should work")
 })
 
 /*******/},
 /*******/
 /*******/18: function(module, exports, require) {
 
-module.exports = "a";
-
-/*******/},
-/*******/
-/*******/19: function(module, exports, require) {
-
-module.exports = require(/* ./a */18);
-
-/*******/},
-/*******/
-/*******/20: function(module, exports, require) {
-
-module.exports = 2;
-module.exports = require(/* ./circular2 */20);
+require.ensure(4, function(require) {
+	require(/* ./acircular */15)
+	window.test(true, "Circular async loading 2")
+})
 
 /*******/},
 /*******/
 /*******/21: function(module, exports, require) {
+
+module.exports = "a";
+
+/*******/},
+/*******/
+/*******/22: function(module, exports, require) {
+
+module.exports = require(/* ./a */21);
+
+/*******/},
+/*******/
+/*******/23: function(module, exports, require) {
+
+module.exports = 2;
+module.exports = require(/* ./circular2 */23);
+
+/*******/},
+/*******/
+/*******/24: function(module, exports, require) {
 
 window.test(false, "index.js should be replaced with index.web.js");
 sdfasdfasd
@@ -102,7 +109,7 @@ sdfasdfasd
 
 /*******/},
 /*******/
-/*******/23: function(module, exports, require) {
+/*******/26: function(module, exports, require) {
 
 // Copyright Joyent, Inc. and other Node contributors.
 //

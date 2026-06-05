@@ -1,3 +1,4 @@
+require = require("../../../require-polyfill")(require.valueOf());
 window.test(true, "index.js should be replaced with index.web.js");
 window.test(window.libary1, "libary1 loaded");
 window.test(window.libary2.ok, "libary2 loaded");
@@ -34,6 +35,7 @@ function testCase(number) {
 testCase(1);
 testCase(2);
 testCase(3);
+window.test(require("../folder/typeof") === "function", "typeof require should be function");
 
 var error = null;
 try {

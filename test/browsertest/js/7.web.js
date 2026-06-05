@@ -1,25 +1,25 @@
 /*******/webpackJsonp(7, {
-/*******/12: function(module, exports, require) {
+/*******/15: function(module, exports, require) {
 
 require.ensure(3, function(require) {
-	require(/* ./acircular2 */15)
+	require(/* ./acircular2 */18)
 	window.test(true, "Circular async loading 1")
 })
 
 /*******/},
 /*******/
-/*******/13: function(module, exports, require) {
+/*******/16: function(module, exports, require) {
 
 require.ensure(5, function(require) {
-	window.test(require(/* ./a */18) === "a", "Duplicate module should work")
+	window.test(require(/* ./a */21) === "a", "Duplicate module should work")
 })
 
 /*******/},
 /*******/
-/*******/14: function(module, exports, require) {
+/*******/17: function(module, exports, require) {
 
 require.ensure(6, function(require) {
-	window.test(require(/* ./b */19) === "a", "Duplicate indirect module should work")
+	window.test(require(/* ./b */22) === "a", "Duplicate indirect module should work")
 })
 
 /*******/},
