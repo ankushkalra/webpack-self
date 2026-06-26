@@ -12,8 +12,10 @@
     "sprintf": "0.1.x"
 	},
   "optionalDependencies": {
-    "http-browserify": "*",
-    "vm-browserify": "*"
+   	"raw-loader": "0.1.0",
+		"json-loader": "0.1.0",
+		"jade-loader": "0.1.0",
+		"coffee-loader": "0.1.0"
   },
   "devDependencies": {
 		"vows": "0.6.2"

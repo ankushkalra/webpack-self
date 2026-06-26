@@ -1,7 +1,13 @@
 /*******/webpackJsonp(5, {
-/*******/21: function(module, exports, require) {
+/*******/14: function(module, exports, require) {
 
 module.exports = "a";
+
+/*******/},
+/*******/
+/*******/17: function(module, exports, require) {
+
+module.exports = require(/* ./a */14);
 
 /*******/},
 /*******/

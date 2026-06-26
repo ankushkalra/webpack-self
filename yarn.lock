@@ -7,6 +7,23 @@ Base64@~0.2.0:
   resolved "https://packages.atlassian.com/api/npm/npm-remote/Base64/-/Base64-0.2.1.tgz"
   integrity sha512-reGEWshDmTDQDsCec/HduOO9Wyj6yMOupMfhIf3ugN1TDlK2NQW4DDJSqNNtp380SNcvRfXtO8HSCQot0d0SMw==
 
+coffee-loader@0.1.0:
+  version "0.1.0"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/coffee-loader/-/coffee-loader-0.1.0.tgz"
+  integrity sha512-YUHt/WghAothIPG3fN62A+1wScTwH0YZlJy/Oz08QfiKgT36e7uNWzfLsp85igJmA4u0cHjm3DAzrk1V7MP4BA==
+  dependencies:
+    coffee-script "*"
+
+coffee-script@*:
+  version "1.12.7"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/coffee-script/-/coffee-script-1.12.7.tgz"
+  integrity sha512-fLeEhqwymYat/MpTPUjSKHVYYl0ec2mOyALEMLmzr5i1isuG+6jfI2j2d5oBO3VIzgUXgBVIcOT9uH1TFxBckw==
+
+commander@0.5.2:
+  version "0.5.2"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/commander/-/commander-0.5.2.tgz"
+  integrity sha512-/IKo89++b1UhClEhWvKk00gKgw6iwvwD8TOPTqqN9AyvjgPCnf9OrjnDNY3dPDOj+K+OhN9SRjYQH0AfX0bROw==
+
 esprima@0.9.8:
   version "0.9.8"
   resolved "https://unpm.uberinternal.com/artifactory/api/npm/npmjs-virtual/esprima/-/esprima-0.9.8.tgz"
@@ -30,12 +47,42 @@ inherits@~2.0.1:
   resolved "https://packages.atlassian.com/api/npm/npm-remote/inherits/-/inherits-2.0.4.tgz"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
+jade-loader@0.1.0:
+  version "0.1.0"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/jade-loader/-/jade-loader-0.1.0.tgz"
+  integrity sha512-SbIHz+yCcDtg04+G5uObptQDeZO8j012NB1ih4sCbPslBMGok+VCLdr5mIjulAtUELWWWTPQoOlwLzT/2+takA==
+  dependencies:
+    jade "0.22.0"
+
+jade@0.22.0:
+  version "0.22.0"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/jade/-/jade-0.22.0.tgz"
+  integrity sha512-t7NSkMMRxctZQJnDyk/GeHwuNZ5y8G5e0A7SDgmP8m6hlPQOdbEJBkRp/0xm5iq6yk832ZCPX+skAn6VpFCvhg==
+  dependencies:
+    commander "0.5.2"
+    mkdirp "0.3.0"
+
+json-loader@0.1.0:
+  version "0.1.0"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/json-loader/-/json-loader-0.1.0.tgz"
+  integrity sha512-Lzfgdleoh3wywZx6RS8b/eV1Q4Sk7TtqZdHQpJDwYHnNNUR1o2lPKZgyKrQsA8FRX1AOfp5xT0MOeyOIy4IRcQ==
+
+mkdirp@0.3.0:
+  version "0.3.0"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/mkdirp/-/mkdirp-0.3.0.tgz"
+  integrity sha512-OHsdUcVAQ6pOtg5JYWpCBo9W/GySVuwvP9hueRMW7UqshC0tbfzLv8wjySTPm3tfUZ/21CE9E1pJagOA91Pxew==
+
 optimist@0.2.x:
   version "0.2.8"
   resolved "https://unpm.uberinternal.com/artifactory/api/npm/npmjs-virtual/optimist/-/optimist-0.2.8.tgz"
   integrity sha512-Wy7E3cQDpqsTIFyW7m22hSevyTLxw850ahYv7FWsw4G6MIKVTZ8NSA95KBrQ95a4SMsMr1UGUUnwEFKhVaSzIg==
   dependencies:
     wordwrap ">=0.0.1 <0.1.0"
+
+raw-loader@0.1.0:
+  version "0.1.0"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/raw-loader/-/raw-loader-0.1.0.tgz"
+  integrity sha512-RoZJMZ/4hXvPPosuNtxFrzLCcKauJd/h0x5XV1ECY0jmqV7gFAwJPlTF7djKIcIGfGDOemjJTFn7OMm1BKDsGQ==
 
 sprintf@0.1.x:
   version "0.1.5"
