@@ -1,82 +1,24 @@
-/*******/webpackJsonp(2, {
-/*******/3: function(module, exports, require) {
+/******/webpackJsonp(2, {
+/******/3: function(module, exports, require) {
 
+/***/function err(name) { throw new Error("Cannot find module '"+name+"'") }
 /***/module.exports = function(name) {
-/***/	var map = {"./circular.js":5,"./index.web.js":0,"./singluar.js":1,"./a.js":14,"./index.js":21,"./acircular.js":15,"./b.js":17,"./circular2.js":18,"./duplicate2.js":20,"./acircular2.js":16,"./duplicate.js":19};
-/***/ console.log('name = ', name);/***/	var value = require(map[name]|| map[name + ".web.js"]|| map[name + ".js"]);
-/***/ console.log('value = ', value);/***/	return value;/***/};
+/***/	var map = {"./acircular.js":13,"./acircular2.js":16,"./circular.js":4,"./duplicate.js":15,"./duplicate2.js":14,"./index.web.js":0,"./singluar.js":1,"./a.js":18,"./index.js":21,"./circular2.js":20,"./b.js":19};
+/***/	return require(map[name]||map[name+".web.js"]||map[name+".js"]||(err(name)));
+/***/};
 
-/*******/},
-/*******/
-/*******/14: function(module, exports, require) {
-
-module.exports = "a";
-
-/*******/},
-/*******/
-/*******/15: function(module, exports, require) {
-
-require.ensure(3, function(require) {
-	require(/* ./acircular2 */16)
-	window.test(true, "Circular async loading 1")
-})
-
-/*******/},
-/*******/
-/*******/16: function(module, exports, require) {
-
-require.ensure(4, function(require) {
-	require(/* ./acircular */15)
-	window.test(true, "Circular async loading 2")
-})
-
-/*******/},
-/*******/
-/*******/17: function(module, exports, require) {
-
-module.exports = require(/* ./a */14);
-
-/*******/},
-/*******/
-/*******/18: function(module, exports, require) {
-
-module.exports = 2;
-module.exports = require(/* ./circular2 */18);
-
-/*******/},
-/*******/
-/*******/19: function(module, exports, require) {
-
-require.ensure(6, function(require) {
-	window.test(require(/* ./a */14) === "a", "Duplicate module should work")
-})
-
-/*******/},
-/*******/
-/*******/20: function(module, exports, require) {
-
-require.ensure(5, function(require) {
-	window.test(require(/* ./b */17) === "a", "Duplicate indirect module should work")
-})
-
-/*******/},
-/*******/
-/*******/21: function(module, exports, require) {
-
-window.test(false, "index.js should be replaced with index.web.js");
-
-/*******/},
-/*******/
-/*******/22: function(module, exports, require) {
+/******/},
+/******/
+/******/9: function(module, exports, require) {
 
 exports.deprecate = function() {};
 exports.id = "webpack";
 
-/*******/},
-/*******/
-/*******/23: function(module, exports, require) {
+/******/},
+/******/
+/******/10: function(module, exports, require) {
 
-exports = module.exports = new (require(/* events */26).EventEmitter);
+exports = module.exports = new (require(/* events */23).EventEmitter);
 if(Object.prototype.__defineGetter__) {
 	exports.__defineGetter__("title", function() { return window.title; });
 	exports.__defineSetter__("title", function(t) { window.title = t; });
@@ -98,16 +40,74 @@ exports.uptime = exports.memoryUsage =
 exports.uvCounters = exports.binding = function() {};
 exports.features = {};
 
-/*******/},
-/*******/
-/*******/24: function(module, exports, require) {
+/******/},
+/******/
+/******/11: function(module, exports, require) {
 
 module.exports = window;
 
+/******/},
+/******/
+/******/13: function(module, exports, require) {
 
-/*******/},
-/*******/
-/*******/26: function(module, exports, require) {
+require.ensure(3, function(require) {
+	require(/* ./acircular2 */16)
+	window.test(true, "Circular async loading 1")
+})
+
+/******/},
+/******/
+/******/14: function(module, exports, require) {
+
+require.ensure(6, function(require) {
+	window.test(require(/* ./b */19) === "a", "Duplicate indirect module should work")
+})
+
+/******/},
+/******/
+/******/15: function(module, exports, require) {
+
+require.ensure(5, function(require) {
+	window.test(require(/* ./a */18) === "a", "Duplicate module should work")
+})
+
+/******/},
+/******/
+/******/16: function(module, exports, require) {
+
+require.ensure(4, function(require) {
+	require(/* ./acircular */13)
+	window.test(true, "Circular async loading 2")
+})
+
+/******/},
+/******/
+/******/18: function(module, exports, require) {
+
+module.exports = "a";
+
+/******/},
+/******/
+/******/19: function(module, exports, require) {
+
+module.exports = require(/* ./a */18);
+
+/******/},
+/******/
+/******/20: function(module, exports, require) {
+
+module.exports = 2;
+module.exports = require(/* ./circular2 */20);
+
+/******/},
+/******/
+/******/21: function(module, exports, require) {
+
+window.test(false, "index.js should be replaced with index.web.js");
+
+/******/},
+/******/
+/******/23: function(module, exports, require) {
 
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -244,11 +244,11 @@ EventEmitter.prototype.addListener = function(type, listener) {
 
     if (m && m > 0 && this._events[type].length > m) {
       this._events[type].warned = true;
-      console.error('(node) warning: possible EventEmitter memory ' +
+      require(/* __webpack_console */24).error('(node) warning: possible EventEmitter memory ' +
                     'leak detected. %d listeners added. ' +
                     'Use emitter.setMaxListeners() to increase limit.',
                     this._events[type].length);
-      console.trace();
+      require(/* __webpack_console */24).trace();
     }
   }
 
@@ -329,6 +329,26 @@ EventEmitter.prototype.listeners = function(type) {
 };
 
 
-/*******/},
-/*******/
-/*******/})
+/******/},
+/******/
+/******/24: function(module, exports, require) {
+
+var console = window.console;
+exports.log = (console && console.log) || function() {};
+exports.info = (console && console.info) || function() {};
+exports.error = (console && console.error) || function() {};
+exports.warn = (console && console.warn) || function() {};
+exports.dir = (console && console.dir) || function() {};
+exports.time = (console && console.time) || function(label) {
+	times[label] = Date.now();
+};
+exports.timeEnd = (console && console.timeEnd) || function() {
+	var duration = Date.now() - times[label];
+	exports.log('%s: %dms', label, duration);
+};
+exports.trace = (console && console.trace) || function() {};
+exports.assert = (console && console.assert) || function() {};
+
+/******/},
+/******/
+/******/})

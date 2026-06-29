@@ -3,25 +3,38 @@
 	<title>webpack tests</title>
 	<script>
 		window.test = function(ok, message) {
-			document.write("<p>" + (ok?"OK: ":"FAILED: ")+message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</p>");
+			document.write("<p " + (ok?">OK: ":"style='color: red; font-weight: bold;'>FAILED: ")+message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</p>");
 		};
 		window.onerror = function(error) {
 			window.test(false, "Shouldn't throw error: " + error);
 		};
 		window.writing = true;
 	</script>
-	<script src="js/web.js"></script>
+	<script src="js/libary1.js" charset="utf-8"></script>
+	<script src="js/libary2.js" charset="utf-8"></script>
+	<script src="js/web.js" charset="utf-8"></script>
 	<script>
 		window.test = function(ok, message) {
 			var p = document.createElement("p");
 			p.appendChild(document.createTextNode((ok?"OK: ":"FAILED: ")+message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")));
+			if(!ok)
+				p.setAttribute("style", "color: red; font-weight: bold;");
 			document.body.appendChild(p);
 		};
 		window.writing = false;
 	</script>
+	<style>
+		span {
+			background: red;
+		}
+	</style>
 </head>
 
 <body>
-
+	<p>
+		<span class="rule-direct">Buildin 'style' loader, direct content</span>
+		<span class="rule-import1">Buildin 'style' loader, imported rule</span>
+		<span class="rule-import2">Buildin 'style' loader, double imported rule</span>
+	</p>
 </body>
 </html>

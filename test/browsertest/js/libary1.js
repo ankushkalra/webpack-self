@@ -1,33 +1,23 @@
-/*******/var libary1=
-/******/(function (modules) {
-/******/    var installedModules = {};
-/******/    function require(moduleId) {
-/******/      if (typeof moduleId !== "number") throw new Error("Cannot find module '"+moduleId+"'"); 
-/******/      if (installedModules[moduleId]) {
-/******/        return installedModules[moduleId].exports;
-/******/      }
-/******/
-/******/      var module = installedModules[moduleId] = {
-/******/       exports: {},
-/******/      };
-/******/
-/******/      console.log("single moduleId = ", moduleId);
-/******/
-/******/      modules[moduleId](
-/******/        module,
-/******/        module.exports,
-/******/        require,
-/******/      ); 
-/******/
-/******/      return module.exports;
-/******/    }
-/******/    require.ensure = function(chunkId, callback) {
-/******/      callback(require);
-/******/    }
-/******/    return require(0);
+/******/var libary1=
+/******/(function(modules) {
+/******/	var installedModules = {};
+/******/	function require(moduleId) {
+/******/		if(typeof moduleId !== "number") throw new Error("Cannot find module '"+moduleId+"'");
+/******/		if(installedModules[moduleId])
+/******/			return installedModules[moduleId].exports;
+/******/		var module = installedModules[moduleId] = {
+/******/			exports: {}
+/******/		};
+/******/		modules[moduleId](module, module.exports, require);
+/******/		return module.exports;
+/******/	}
+/******/	require.ensure = function(chunkId, callback) {
+/******/		callback(require);
+/******/	};
+/******/	return require(0);
 /******/})
-/*******/({
-/*******/0: function(module, exports, require) {
+/******/({
+/******/0: function(module, exports, require) {
 
 // Single File Libary
 window.test(window.writing, "Lib1 Should be in first tick");
@@ -43,40 +33,40 @@ require.ensure(1, function(require) {
 });
 module.exports = true;
 
-/*******/},
-/*******/
-/*******/1: function(module, exports, require) {
+/******/},
+/******/
+/******/1: function(module, exports, require) {
 
 module.exports = require(/* ./comp.js */2);
 
-/*******/},
-/*******/
-/*******/2: function(module, exports, require) {
+/******/},
+/******/
+/******/2: function(module, exports, require) {
 
 module.exports = "lib1 component";
 
-/*******/},
-/*******/
-/*******/3: function(module, exports, require) {
+/******/},
+/******/
+/******/3: function(module, exports, require) {
 
 module.exports = "submodule1";
 
-/*******/},
-/*******/
-/*******/4: function(module, exports, require) {
+/******/},
+/******/
+/******/4: function(module, exports, require) {
 
 module.exports = (function() {
 	return "submodule2";
 }());
 
-/*******/},
-/*******/
-/*******/5: function(module, exports, require) {
+/******/},
+/******/
+/******/5: function(module, exports, require) {
 
 module.exports = function() {
 	return "submodule3";
 };
 
-/*******/},
-/*******/
-/*******/})
+/******/},
+/******/
+/******/})

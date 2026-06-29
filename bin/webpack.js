@@ -1,6 +1,7 @@
 var webpack = require("../lib/webpack");
 var fs = require("fs");
 var path = require("path");
+var sprintf = require("sprintf").sprintf;
 
 var argv = require("optimist")
   .usage("Usage: $0 <entry> <output>")
@@ -33,6 +34,14 @@ var argv = require("optimist")
   .boolean("json")
   .describe("json", "Output Stats as JSON")
   .default("json", false)
+
+  .boolean("by-size")
+  .describe("by-size", "Sort modules by size in stats")
+  .default("by-size", false)
+
+  .boolean("verbose")
+  .describe("verbose", "Output dependencies in stats")
+  .default("verbose", false)
 
   .string("alias")
   .describe("alias", "Set a alias name for a module. ex. http=http-browserify")
@@ -116,6 +125,32 @@ if (argv.single) {
       console.error(err);
       return;
     }
-    console.log(stats);
+    if (argv.json)
+      console.log(util.inspect(stats, false, 10, argv.colors));
+    else {
+      console.log("json false stats = ", stats);
+      function c(str) {
+        return argv.colors ? str : "";
+      }
+      console.log("Chunks: "+c("\033[1m") + stats.chunkCount + c("\033[22m"));
+      console.log("Modules: "+c("\033[1m") + stats.modulesCount + c("\033[22m"));
+      if (stats.fileModules) {
+        console.log();
+        console.log(" <id>  <size>  <filename>");
+        if (argv.verbose)
+          console.log("       <reason> from <filename>");
+        for (var file in stats.fileModules) {
+          console.log(c("\033[1m\033[32m") + file + c("\033[39m\033[22m"));
+          var modules = stats.fileModules[file];
+          if(argv["by-size"])
+            modules.sort(function(a,b) {
+              return b.size - a.size;
+            });
+          modules.forEach(function (module) {
+            console.log(" "+c("\033[1m") + sprintf("%3s", module.id) + " " + (typeof module.size === "number" ? sprintf("%9s", Math.round(module.size)+""): " no-size  ") + " " + module.filename || module.dirname);
+          });
+        }
+      }
+    }
   });
 }

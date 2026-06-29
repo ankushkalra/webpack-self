@@ -12,10 +12,13 @@
     "sprintf": "0.1.x"
 	},
   "optionalDependencies": {
-   	"raw-loader": "0.1.0",
-		"json-loader": "0.1.0",
-		"jade-loader": "0.1.0",
-		"coffee-loader": "0.1.0"
+   	"raw-loader": "0.1.x",
+		"json-loader": "0.1.x",
+		"jade-loader": "0.1.x",
+		"coffee-loader": "0.1.x",
+		"css-loader": "0.1.x",
+		"style-loader": "0.1.x",
+		"script-loader": "0.1.x"
   },
   "devDependencies": {
 		"vows": "0.6.2"

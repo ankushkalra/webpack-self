@@ -1,18 +1,18 @@
-/*******/webpackJsonp(9, {
-/*******/19: function(module, exports, require) {
+/******/webpackJsonp(9, {
+/******/14: function(module, exports, require) {
 
 require.ensure(6, function(require) {
-	window.test(require(/* ./a */14) === "a", "Duplicate module should work")
+	window.test(require(/* ./b */19) === "a", "Duplicate indirect module should work")
 })
 
-/*******/},
-/*******/
-/*******/20: function(module, exports, require) {
+/******/},
+/******/
+/******/15: function(module, exports, require) {
 
 require.ensure(5, function(require) {
-	window.test(require(/* ./b */17) === "a", "Duplicate indirect module should work")
+	window.test(require(/* ./a */18) === "a", "Duplicate module should work")
 })
 
-/*******/},
-/*******/
-/*******/})
+/******/},
+/******/
+/******/})

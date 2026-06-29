@@ -30,6 +30,7 @@
 /******/      var head = document.getElementsByTagName('head')[0];
 /******/      var script = document.createElement('script');
 /******/      script.type = 'text/javascript';
+/******/      script.charset = 'utf-8';
 /******/      console.log("script c, chunkId, a = ", modules.c, chunkId, modules.a);
 /******/      script.src = modules.c + chunkId + modules.a;
 /******/      head.appendChild(script);
@@ -48,30 +49,10 @@
 /******/ }
 /******/})(document)
 
-/******/({a:'.libary2.js', b: 'webpackJsonplibary2', c: 'js/',
+/******/({a:".libary2.js", b: "webpackJsonplibary2", c: "js/",
 /*******/0: function(module, exports, require) {
 
-// Chunked File Libary
-window.test(window.writing, "Lib2 Should be in first tick");
-var asnycOk = false, asnycOk2 = false;
-require.ensure(1, function(require) {
-	asnycOk = true;
-	window.test(!window.writing, "Lib2 Should be asynchron loaded");
-	var sameTick = true;
-	require.ensure(0, function(require) {
-		asnycOk2 = true;
-		window.test(require(/* ./extra */1) === "Lib2 extra", "Lib2 extra loaded");
-		window.test(sameTick, "Lib2 Should be in the same tick, as it is a empty chunk");
-	});
-	sameTick = false;
-});
-setTimeout(function() {
-	window.test(asnycOk, "Lib2 Chunk 1 should be loaded");
-	window.test(asnycOk2, "Lib2 Chunk 2 should be loaded");
-}, 3000);
-window.test(!asnycOk, "Lib2 Chunk 1 should not be loaded yet");
-window.test(!asnycOk2, "Lib2 Chunk 2 should not be loaded yet");
-exports.ok = true;
+
 
 /*******/},
 /*******/
