@@ -119,8 +119,9 @@ if (argv.single) {
   var outExists = fs.existsSync(options.outputDirectory);
   if (!outExists) fs.mkdirSync(options.outputDirectory);
 
-  console.log("webpack called else");
+  // console.log("webpack called else");
   webpack(input, options, function(err, stats) {
+    console.log("webpack returned");
     if (err) {
       console.error(err);
       return;
@@ -132,8 +133,25 @@ if (argv.single) {
       function c(str) {
         return argv.colors ? str : "";
       }
-      console.log("Chunks: "+c("\033[1m") + stats.chunkCount + c("\033[22m"));
-      console.log("Modules: "+c("\033[1m") + stats.modulesCount + c("\033[22m"));
+      console.log("Chunks: " + c("\033[1m") + stats.chunkCount + c("\033[22m"));
+      console.log("Modules: " + c("\033[1m") + stats.modulesCount + c("\033[22m"));
+      console.log("Modules including duplicates: " + c("\033[1m") + stats.modulesIncludingDuplicates + c("\033[22m"));
+      console.log("Modules per chunk: " + c("\033[1m") + stats.modulesPerChunk + c("\033[22m"));
+      console.log("Modules first chunk: " + c("\033[1m") + stats.modulesFirstChunk + c("\033[22m"));
+      if (stats.fileSizes) {
+        for (var file in stats.fileSizes) {
+          console.log(c("\033[1m") + sprintf("%" + (5 + options.output.length) + "s", file) + c("\033[22m") + ": " + c("\033[1m") + sprintf("%8d", stats.fileSizes[file]) + c("\033[22m") + " characters");
+        }
+      }
+      var cwd = process.cwd();
+      var cwdParent = path.dirname(cwd);
+      var buildins = path.join(__dirname, "..");
+      function compressFilename(filename) {
+        if (!filename) {
+          return filename;
+        }
+      }
+
       if (stats.fileModules) {
         console.log();
         console.log(" <id>  <size>  <filename>");
@@ -142,12 +160,13 @@ if (argv.single) {
         for (var file in stats.fileModules) {
           console.log(c("\033[1m\033[32m") + file + c("\033[39m\033[22m"));
           var modules = stats.fileModules[file];
-          if(argv["by-size"])
-            modules.sort(function(a,b) {
+          if (argv["by-size"])
+            modules.sort(function(a, b) {
               return b.size - a.size;
             });
-          modules.forEach(function (module) {
-            console.log(" "+c("\033[1m") + sprintf("%3s", module.id) + " " + (typeof module.size === "number" ? sprintf("%9s", Math.round(module.size)+""): " no-size  ") + " " + module.filename || module.dirname);
+          modules.forEach(function(module) {
+            // console.log("module.id = ", module);
+            console.log(" " + c("\033[1m") + sprintf("%3s", module.id) + " " + (typeof module.size === "number" ? sprintf("%9s", Math.round(module.size) + "") : " no-size  ") + " " + module.filename || module.dirname);
           });
         }
       }

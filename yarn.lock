@@ -31,7 +31,7 @@ csso@1.2.x:
   resolved "https://packages.atlassian.com/api/npm/npm-remote/csso/-/csso-1.2.18.tgz"
   integrity sha512-cLcOyGfcRqdrD7rIW3kpYepkRTh5txtKT6kR/Dn0N+xwZOO2A/TVMKjs6uIsUp9WZCg1/XCN5OfqOJHiCj9wDA==
 
-esprima@0.9.8:
+esprima@0.9.x:
   version "0.9.8"
   resolved "https://unpm.uberinternal.com/artifactory/api/npm/npmjs-virtual/esprima/-/esprima-0.9.8.tgz"
   integrity sha512-2E+baqrFdAszMd1SfgRbUG1ndUAFQI6nzIKYz5f26bzoFRPqfEoTPXVvw7u9ZjpMysENE8nxyiiOLGp1tvojNQ==
